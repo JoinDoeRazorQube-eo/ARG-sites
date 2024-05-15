@@ -1,4 +1,63 @@
+Body {
+  background-color: #FCF5ED;
+  margin-left: 5vw;
+}
+H1 {
+  color: #CE5A67;
+}
+
+H2 {
+  color: #ffa25b;
+}
 
 P {
-  font-size: 50pt;
+  color: #1F1717;
+  font-size: 12pt;
+}
+
+A:link {
+  color: #CE5A67;
+}
+A:visited {
+  color: #ffa25b;
+}
+
+em {
+  color: #1F1717;
+  font-size: 12pt;
+}
+
+button {
+  background-color: #F4BF96;
+  border-color: #CE5A67;
+  color: color: #1F1717;
+  border-radius: 5px;
+}
+
+.InputBackgroundDiv {
+  background-color: #F4BF96;
+  border-radius: 10px;
+  height: 100px;
+  width: 300px;
+  text-align: center;
+}
+
+.InputLabel {
+  font-size: 25px;
+}
+
+.InputText {
+  font-size: 15px;
+
+}
+
+.OutputTextArea {
+  border-radius: 10px;
+  resize: none;
+  border: none;
+  background-color: #FCF5ED;
+  height: 100px;
+  width: 300px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
