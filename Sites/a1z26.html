@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A1Z26 Cypher</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="cypherPractise.js"></script>
   </head>
   <body>
     <a href="index.html" style = "margin-Left: -4vw">Go back</a>
     <h1>A1Z26 Cypher</h1>
     <div class = "InputBackgroundDiv">
       <p class = "InputLabel">Text to decrypt:</p>
-      <p class = "InputText">DummyText</p>
+      <p class = "InputText" id = "InputText">DummyText</p>
     </div>
 
-    <textarea class = "OutputTextArea" placeholder = "Insert Decryption Here"></textarea>
+    <textarea class = "OutputTextArea" id = "OutputText" placeholder = "Insert Decryption Here"></textarea>
     <br>
-    <button class = "VerrifyButton">Verrify</button>
-    <button class = "RerollButton">Another One</button>
-    <em id = "result">Congrats!</em>
+    <button class = "VerifyButton" onclick = "verify();">Verify</button>
+    <button class = "RerollButton" onclick = "reroll();">Another One</button>
+    <em id = "result"></em>
+    <br>
+    <div style="margin-top: 20px">
+      <input id = "HardModeCheckbox" type="checkbox" onchange="easyModeToggle();">
+      <em>HARD MODE!</em>
+      <p style = "font-size: 8pt; display: inline-block">(This will add special characters and use the ascii chart as the numerical base)</p>
+      <br>
+      <p style = "font-size: 6pt; margin-top: -4px">Clicking this will automatically change the text to decypher</p>
+    </div>
   </body>
 </html>
