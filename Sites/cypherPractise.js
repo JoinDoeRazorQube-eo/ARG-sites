@@ -1,8 +1,35 @@
 var plaintext = "";
 var easyMode = true;
+var gameMode = 0;
 window.onload = (event) => {
+  gameMode = 0;
   easyModeToggle();
 };
+
+function modeChange() {
+    gameMode = (gameMode+1)%3
+    switch (gameMode) {
+        case 0:
+          document.getElementById("modeButton").innerText = "A1Z26";
+          document.getElementById("KeyInputNum").style.display = "none";
+          document.getElementById("KeyInputText").style.display = "none";
+          break;
+        case 1:
+          document.getElementById("modeButton").innerText = "Caesar";
+          document.getElementById("KeyInputNum").style.display = "inline-block";
+          document.getElementById("KeyInputText").style.display = "none";
+          break;
+        case 2:
+          document.getElementById("modeButton").innerText = "Viginere";
+          document.getElementById("KeyInputNum").style.display = "none";
+          document.getElementById("KeyInputText").style.display = "inline-block";
+          break;
+        default:
+          document.getElementById("modeButton").innerText = "????";
+          break;
+    }
+    reroll();
+}
 
 function easyModeToggle() {
     easyMode = !document.getElementById("HardModeCheckbox").checked;
@@ -27,6 +54,7 @@ function verify() {
 }
 
 function reroll() {
+  document.getElementById("result").innerText = "";
   const sentances = [
     "Hello World",
     "The Spice must flow",
@@ -44,19 +72,49 @@ function reroll() {
   if (easyMode) {
     chosenSentance = chosenSentance.replace(/,|'|\./g, "");
   }
-
+  var asciiSubtract = 0;
   plaintext = chosenSentance
+  switch (gameMode) {
+      case 0:
+        for (let i = 0; i < chosenSentance.length; i++) {
+          let asciiCode = chosenSentance.charCodeAt(i)
+          if (i > 0) out += " ";
+          if (easyMode) {
+            asciiCode > 90 ? asciiSubtract = 96 : asciiSubtract = 64;
+          }
+          if (asciiCode > asciiSubtract) out += String(asciiCode-asciiSubtract);
+        }
+        break;
+        //you know what fuck it spaghetti code it is!
+      case 1:
+      var max = 126;
+      var min = 32;
+        for (let i = 0; i < chosenSentance.length; i++) {
+          let asciiCode;
+          if (easyMode) {
+            max = 90;
+            min = 65;
+            asciiCode = chosenSentance.toUpperCase().charCodeAt(i)
+          } else {
+            asciiCode = chosenSentance.charCodeAt(i)
+          }
+          if (asciiCode >= min && asciiCode <= max) {
+            asciiCode += +document.getElementById("KeyInputNum").value;
+            if (asciiCode > max) {
+              asciiCode = asciiCode - max + min;
+            } else if (asciiCode < min) {
+              asciiCode = max + 1 - min + asciiCode
+            }
+          }
+          out += String.fromCharCode(asciiCode);
+        }
+        break;
+      case 2:
 
-  if (window.location.href.includes("a1z26")) {
-    var asciiSubtract = 0;
-    for (let i = 0; i < chosenSentance.length; i++) {
-      let asciiCode = chosenSentance.charCodeAt(i)
-      if (easyMode) {
-        asciiCode > 90 ? asciiSubtract = 96 : asciiSubtract = 64;
-      }
-      if (asciiCode > asciiSubtract) out += String(asciiCode-asciiSubtract);
-      out += " ";
-    }
+        break;
+      default:
+
+        break;
   }
 
   document.getElementById("InputText").innerText = out;
