@@ -3,13 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A1Z26 Cypher</title>
+    <title>Substitution Cyphers</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <script src="cypherPractise.js"></script>
   </head>
   <body>
     <a href="index.html" style = "margin-Left: -4vw">Go back</a>
-    <h1>A1Z26 Cypher</h1>
+    <h1 style="margin-top: 5px;">Substitution Cyphers</h1>
+    <br>
+    <button id = "modeButton" class = "modeButton" onclick = "modeChange();">A1Z26</button>
+    <input class = "KeyInput" id = "KeyInputNum" type = "number" min="-25" max="24">
+    <input class = "KeyInput" id = "KeyInputText" type = "text" style = "width: 200px;">
+    <br>
     <div class = "InputBackgroundDiv">
       <p class = "InputLabel">Text to decrypt:</p>
       <p class = "InputText" id = "InputText">DummyText</p>
@@ -24,9 +29,10 @@
     <div style="margin-top: 20px">
       <input id = "HardModeCheckbox" type="checkbox" onchange="easyModeToggle();">
       <em>HARD MODE!</em>
-      <p style = "font-size: 8pt; display: inline-block">(This will add special characters and use the ascii chart as the numerical base)</p>
+      <p style = "font-size: 8pt; display: inline-block">(This will add special characters and use the ascii chart as the numerical base. The answer will become case sensitive)</p>
       <br>
       <p style = "font-size: 6pt; margin-top: -4px">Clicking this will automatically change the text to decypher</p>
+      <p id = "test"></p>
     </div>
   </body>
 </html>

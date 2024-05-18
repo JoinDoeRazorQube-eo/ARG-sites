@@ -49,11 +49,13 @@ input[type=checkbox]:checked {
 
 .InputLabel {
   font-size: 25px;
+  padding-top: 5px;
 }
 
 .InputText {
   font-size: 15px;
-
+  padding-bottom: 5px;
+  padding-left:15px; padding-right: 15px;
 }
 
 .OutputTextArea {
@@ -65,4 +67,26 @@ input[type=checkbox]:checked {
   width: 300px;
   margin-top: 30px;
   margin-bottom: 10px;
+}
+
+.modeButton {
+  width: 100px;
+  height: 35px;
+  text-align: center;
+  font-size: 14pt;
+  color: #CE5A67;
+  margin-right: 20px;
+}
+
+.KeyInput {
+  width: 100px;
+  height: 29px;
+  text-align: center;
+  font-size: 14pt;
+  color: #1F1717;
+  background-color: #CE5A67;
+  border-color: #1F1717;
+  border-style: inset;
+  border-radius: 5px;
+  display: none;
 }
