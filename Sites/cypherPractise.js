@@ -73,8 +73,69 @@ function reroll() {
     chosenSentance = chosenSentance.replace(/,|'|\./g, "");
   }
   var asciiSubtract = 0;
-  plaintext = chosenSentance
-  switch (gameMode) {
+  plaintext = chosenSentance;
+  if (gameMode == 0) {
+    for (let i = 0; i < chosenSentance.length; i++) {
+      let asciiCode = chosenSentance.charCodeAt(i);
+      if (i > 0) out += " ";
+      if (easyMode) {
+        asciiCode > 90 ? asciiSubtract = 96 : asciiSubtract = 64;
+      }
+      if (asciiCode > asciiSubtract) out += String(asciiCode-asciiSubtract);
+    }
+  } else {
+    var max = 126;
+    var min = 32;
+
+      let j = 0;
+    for (let i = 0; i < chosenSentance.length; i++) {
+      let asciiCode;
+        let inputText;
+        if (document.getElementById("KeyInputText").value == '') {
+          inputText = "Viginere";
+        } else {
+          inputText = document.getElementById("KeyInputText").value;
+        }
+
+      if (easyMode) {
+        max = 90;
+        min = 65;
+        asciiCode = chosenSentance.toUpperCase().charCodeAt(i);
+        //dunno if it is better or worse to put an if gamemode two arround the indented code
+          inputText = inputText.toUpperCase();
+          inputText = inputText.replace(/[^A-Z]/g, "");
+          document.getElementById("KeyInputText").value = inputText;
+
+      } else {
+        asciiCode = chosenSentance.charCodeAt(i);
+      }
+
+          inputText = inputText.replace(" ", "");
+          document.getElementById("KeyInputText").value = inputText;
+          let inputAscii = inputText[j % inputText.length].charCodeAt();
+          inputAscii = inputAscii-min;
+          //document.getElementById("result").innerText += inputAscii;
+
+      if (asciiCode >= min && asciiCode <= max) {
+        if (gameMode == 1) {
+          asciiCode += +document.getElementById("KeyInputNum").value;
+        }
+        if (gameMode == 2){
+          asciiCode += inputAscii;
+        }
+
+        if (asciiCode > max) {
+          asciiCode = asciiCode - max + min -1;
+        } else if (asciiCode < min) {
+          asciiCode = max + 1 - min + asciiCode;
+        }
+      }
+
+      out += String.fromCharCode(asciiCode);
+        if (asciiCode != 32) { j++; }
+    }
+  }
+  /*switch (gameMode) {
       case 0:
         for (let i = 0; i < chosenSentance.length; i++) {
           let asciiCode = chosenSentance.charCodeAt(i)
@@ -94,28 +155,60 @@ function reroll() {
           if (easyMode) {
             max = 90;
             min = 65;
-            asciiCode = chosenSentance.toUpperCase().charCodeAt(i)
+            asciiCode = chosenSentance.toUpperCase().charCodeAt(i);
           } else {
-            asciiCode = chosenSentance.charCodeAt(i)
+            asciiCode = chosenSentance.charCodeAt(i);
           }
           if (asciiCode >= min && asciiCode <= max) {
             asciiCode += +document.getElementById("KeyInputNum").value;
             if (asciiCode > max) {
-              asciiCode = asciiCode - max + min;
+              asciiCode = asciiCode - max + min -1;
             } else if (asciiCode < min) {
-              asciiCode = max + 1 - min + asciiCode
+              asciiCode = max + 1 - min + asciiCode;
             }
           }
           out += String.fromCharCode(asciiCode);
         }
         break;
-      case 2:
+      case 2: //I know I know DRY code... plz don't judge me
+      var max = 126;
+      var min = 32;
+      let j = 0;
+        for (let i = 0; i < chosenSentance.length; i++) {
+          let asciiCode;
+          let inputText = document.getElementById("KeyInputText").value
+          if (easyMode) {
+            max = 90;
+            min = 65;
+            asciiCode = chosenSentance.toUpperCase().charCodeAt(i)
+            inputText = inputText.toUpperCase();
+            inputText = inputText.replace(/,|'|\./g, "");
+            document.getElementById("KeyInputText").value = inputText;
+          } else {
+            asciiCode = chosenSentance.charCodeAt(i);
+          }
+          inputText = inputText.replace(" ", "");
+          document.getElementById("KeyInputText").value = inputText;
+          let inputAscii = inputText[j % inputText.length].charCodeAt();
+          inputAscii = inputAscii-min;
+          document.getElementById("result").innerText += inputAscii;
 
+          if (asciiCode >= min && asciiCode <= max) {
+            asciiCode += inputAscii;
+            if (asciiCode > max) {
+              asciiCode = asciiCode - max + min - 1;
+            } else if (asciiCode < min) {
+              asciiCode = max + 1 - min + asciiCode;
+            }
+          }
+          out += String.fromCharCode(asciiCode);
+          if (asciiCode != 32) { j++; }
+        }
         break;
       default:
 
         break;
-  }
+  }*/
 
   document.getElementById("InputText").innerText = out;
 }
