@@ -90,3 +90,9 @@ input[type=checkbox]:checked {
   border-radius: 5px;
   display: none;
 }
+
+.divider {
+  display: inline-block;
+  height: 300px;
+  width: 400px;
+}

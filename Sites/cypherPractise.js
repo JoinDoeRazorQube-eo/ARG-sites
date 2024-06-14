@@ -7,23 +7,32 @@ window.onload = (event) => {
 };
 
 function modeChange() {
-    gameMode = (gameMode+1)%3
+    gameMode = (gameMode+1)%4;
     switch (gameMode) {
         case 0:
           document.getElementById("modeButton").innerText = "A1Z26";
           document.getElementById("KeyInputNum").style.display = "none";
           document.getElementById("KeyInputText").style.display = "none";
+          document.getElementById("BookDiv").style.display = "none";
           break;
         case 1:
           document.getElementById("modeButton").innerText = "Caesar";
           document.getElementById("KeyInputNum").style.display = "inline-block";
           document.getElementById("KeyInputText").style.display = "none";
+          document.getElementById("BookDiv").style.display = "none";
           break;
         case 2:
           document.getElementById("modeButton").innerText = "Viginere";
           document.getElementById("KeyInputNum").style.display = "none";
           document.getElementById("KeyInputText").style.display = "inline-block";
+          document.getElementById("BookDiv").style.display = "none";
           break;
+        case 3:
+            document.getElementById("modeButton").innerText = "Book Code";
+            document.getElementById("KeyInputNum").style.display = "none";
+            document.getElementById("KeyInputText").style.display = "none";
+            document.getElementById("BookDiv").style.display = "inline-block";
+            break;
         default:
           document.getElementById("modeButton").innerText = "????";
           break;
@@ -40,8 +49,8 @@ function verify() {
   var input = plaintext;
   var output = document.getElementById("OutputText").value;
   if (easyMode) {
-    input = input.toLowerCase().replace(/ /g, "");
-    output = output.toLowerCase().replace(/ |,|'|\./g, "")
+    input = Clean(input, true);
+    output = Clean(output, true);
   }
 
   if (input == output) {
@@ -70,7 +79,7 @@ function reroll() {
   var chosenSentance = sentances[Math.round(Math.random()*(sentances.length-1))];
   var out = "";
   if (easyMode) {
-    chosenSentance = chosenSentance.replace(/,|'|\./g, "");
+    chosenSentance = Clean(chosenSentance, true);
   }
   var asciiSubtract = 0;
   plaintext = chosenSentance;
@@ -83,7 +92,7 @@ function reroll() {
       }
       if (asciiCode > asciiSubtract) out += String(asciiCode-asciiSubtract);
     }
-  } else {
+  } else if (gameMode != 3){
     var max = 126;
     var min = 32;
 
@@ -100,10 +109,9 @@ function reroll() {
       if (easyMode) {
         max = 90;
         min = 65;
-        asciiCode = chosenSentance.toUpperCase().charCodeAt(i);
+        asciiCode = chosenSentance.charCodeAt(i);
         //dunno if it is better or worse to put an if gamemode two arround the indented code
-          inputText = inputText.toUpperCase();
-          inputText = inputText.replace(/[^A-Z]/g, "");
+          inputText = inputText.toUpperCase().replace(/[^A-Z]/g, "");
           document.getElementById("KeyInputText").value = inputText;
 
       } else {
@@ -114,7 +122,6 @@ function reroll() {
           document.getElementById("KeyInputText").value = inputText;
           let inputAscii = inputText[j % inputText.length].charCodeAt();
           inputAscii = inputAscii-min;
-          //document.getElementById("result").innerText += inputAscii;
 
       if (asciiCode >= min && asciiCode <= max) {
         if (gameMode == 1) {
@@ -134,81 +141,62 @@ function reroll() {
       out += String.fromCharCode(asciiCode);
         if (asciiCode != 32) { j++; }
     }
+  } else {
+    const breakIndeces = [];
+    var bookText = document.getElementById("BookText").innerText;
+    var breaks = document.getElementById("BookText").innerHTML;
+
+    if (easyMode) {
+      bookText = bookText.toUpperCase();
+    }
+
+    let idx = breaks.indexOf("<br>");
+    for (let i = 0; idx !== -1; i ++) {
+      breakIndeces.push(idx-(4*i));
+      idx = breaks.indexOf("<br>", idx + 1);
+     }
+
+     for (let i = 0; i < chosenSentance.length; i++) {
+       if (i > 0) out += " ";
+       let letterIndices = [];
+       var element = chosenSentance[i];
+       let inde = bookText.indexOf(element);
+       while (inde !== -1 && inde < breakIndeces[breakIndeces.length-1]) {
+         letterIndices.push(inde);
+         inde = bookText.indexOf(element, inde + 1);
+       }
+
+       if (letterIndices.length > 0) {
+         var chosenLetter = letterIndices[Math.round(Math.random()*(letterIndices.length-1))];
+         var line = 1;
+         for (let j = 0; j < breakIndeces.length; j++) {
+           document.getElementById("result").innerText += +breakIndeces[j] + " ";
+           if (chosenLetter < breakIndeces[j]) {
+             document.getElementById("result").innerText = " " + +chosenLetter + " " + +breakIndeces[j-1];
+
+             chosenLetter += 1;
+             if (j > 0) {out += String(chosenLetter-breakIndeces[j-1])}
+             else {out += +chosenLetter;}
+             break;
+           } else {
+             line++;
+           }
+         }
+            out += ":" + +line + ";";
+       } else {
+         out += chosenSentance[i];
+       }
+     }
   }
-  /*switch (gameMode) {
-      case 0:
-        for (let i = 0; i < chosenSentance.length; i++) {
-          let asciiCode = chosenSentance.charCodeAt(i)
-          if (i > 0) out += " ";
-          if (easyMode) {
-            asciiCode > 90 ? asciiSubtract = 96 : asciiSubtract = 64;
-          }
-          if (asciiCode > asciiSubtract) out += String(asciiCode-asciiSubtract);
-        }
-        break;
-        //you know what fuck it spaghetti code it is!
-      case 1:
-      var max = 126;
-      var min = 32;
-        for (let i = 0; i < chosenSentance.length; i++) {
-          let asciiCode;
-          if (easyMode) {
-            max = 90;
-            min = 65;
-            asciiCode = chosenSentance.toUpperCase().charCodeAt(i);
-          } else {
-            asciiCode = chosenSentance.charCodeAt(i);
-          }
-          if (asciiCode >= min && asciiCode <= max) {
-            asciiCode += +document.getElementById("KeyInputNum").value;
-            if (asciiCode > max) {
-              asciiCode = asciiCode - max + min -1;
-            } else if (asciiCode < min) {
-              asciiCode = max + 1 - min + asciiCode;
-            }
-          }
-          out += String.fromCharCode(asciiCode);
-        }
-        break;
-      case 2: //I know I know DRY code... plz don't judge me
-      var max = 126;
-      var min = 32;
-      let j = 0;
-        for (let i = 0; i < chosenSentance.length; i++) {
-          let asciiCode;
-          let inputText = document.getElementById("KeyInputText").value
-          if (easyMode) {
-            max = 90;
-            min = 65;
-            asciiCode = chosenSentance.toUpperCase().charCodeAt(i)
-            inputText = inputText.toUpperCase();
-            inputText = inputText.replace(/,|'|\./g, "");
-            document.getElementById("KeyInputText").value = inputText;
-          } else {
-            asciiCode = chosenSentance.charCodeAt(i);
-          }
-          inputText = inputText.replace(" ", "");
-          document.getElementById("KeyInputText").value = inputText;
-          let inputAscii = inputText[j % inputText.length].charCodeAt();
-          inputAscii = inputAscii-min;
-          document.getElementById("result").innerText += inputAscii;
-
-          if (asciiCode >= min && asciiCode <= max) {
-            asciiCode += inputAscii;
-            if (asciiCode > max) {
-              asciiCode = asciiCode - max + min - 1;
-            } else if (asciiCode < min) {
-              asciiCode = max + 1 - min + asciiCode;
-            }
-          }
-          out += String.fromCharCode(asciiCode);
-          if (asciiCode != 32) { j++; }
-        }
-        break;
-      default:
-
-        break;
-  }*/
-
   document.getElementById("InputText").innerText = out;
+}
+
+
+
+
+function Clean(str, toUpper) {
+  if (toUpper == true) {
+    str = str.toUpperCase();
+  }
+  return str.replace(/[^0-9a-z-A-Z ]/g, "");
 }
