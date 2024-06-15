@@ -170,10 +170,7 @@ function reroll() {
          var chosenLetter = letterIndices[Math.round(Math.random()*(letterIndices.length-1))];
          var line = 1;
          for (let j = 0; j < breakIndeces.length; j++) {
-           document.getElementById("result").innerText += +breakIndeces[j] + " ";
            if (chosenLetter < breakIndeces[j]) {
-             document.getElementById("result").innerText = " " + +chosenLetter + " " + +breakIndeces[j-1];
-
              chosenLetter += 1;
              if (j > 0) {out += String(chosenLetter-breakIndeces[j-1])}
              else {out += +chosenLetter;}
