@@ -6,33 +6,29 @@ window.onload = (event) => {
   easyModeToggle();
 };
 
-function modeChange() {
-    gameMode = (gameMode+1)%4;
+function modeChange(mode) {
+    gameMode = mode;
     switch (gameMode) {
         case 0:
-          document.getElementById("modeButton").innerText = "A1Z26";
           document.getElementById("KeyInputNum").style.display = "none";
           document.getElementById("KeyInputText").style.display = "none";
           document.getElementById("BookDiv").style.display = "none";
           break;
         case 1:
-          document.getElementById("modeButton").innerText = "Caesar";
           document.getElementById("KeyInputNum").style.display = "inline-block";
           document.getElementById("KeyInputText").style.display = "none";
           document.getElementById("BookDiv").style.display = "none";
           break;
         case 2:
-          document.getElementById("modeButton").innerText = "Viginere";
           document.getElementById("KeyInputNum").style.display = "none";
           document.getElementById("KeyInputText").style.display = "inline-block";
           document.getElementById("BookDiv").style.display = "none";
           break;
         case 3:
-            document.getElementById("modeButton").innerText = "Book Code";
-            document.getElementById("KeyInputNum").style.display = "none";
-            document.getElementById("KeyInputText").style.display = "none";
-            document.getElementById("BookDiv").style.display = "inline-block";
-            break;
+          document.getElementById("KeyInputNum").style.display = "none";
+          document.getElementById("KeyInputText").style.display = "none";
+          document.getElementById("BookDiv").style.display = "inline-block";
+          break;
         default:
           document.getElementById("modeButton").innerText = "????";
           break;

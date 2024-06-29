@@ -1,6 +1,7 @@
 Body {
   background-color: #FCF5ED;
   margin-left: 5vw;
+  accent-color: #CE5A67;
 }
 H1 {
   color: #CE5A67;
@@ -30,12 +31,12 @@ em {
 button {
   background-color: #F4BF96;
   border-color: #CE5A67;
-  color: color: #1F1717;
+  color: #1F1717;
   border-radius: 5px;
 }
 
-input[type=checkbox]:checked {
-  accent-color: #CE5A67;
+audio {
+  background-color: #CE5A67;
 }
 
 .InputBackgroundDiv {
@@ -70,7 +71,7 @@ input[type=checkbox]:checked {
 }
 
 .modeButton {
-  width: 100px;
+  min-width: 100px;
   height: 35px;
   text-align: center;
   font-size: 14pt;
@@ -78,7 +79,14 @@ input[type=checkbox]:checked {
   margin-right: 20px;
 }
 
+.modeButton:focus {
+  color: #1F1717;
+  background-color: #CE5A67;
+  border-color: #1F1717;
+}
+
 .KeyInput {
+  margin-top: 25px;
   width: 100px;
   height: 29px;
   text-align: center;

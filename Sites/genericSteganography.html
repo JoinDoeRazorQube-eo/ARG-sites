@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="cypherPractise.js"></script>
+  </head>
+  <body>
+    <a href="index.html" style = "margin-Left: -4vw">Go back</a>
+    <h1 style="margin-top: 5px;">Steganography</h1>
+    <br>
+    <button class = "modeButton" onclick = "modeChange(0);" autofocus = "true">Spectrogram</button>
+    <button class = "modeButton" onclick = "modeChange(1);">Image</button>
+    <!--<button class = "modeButton" onclick = "modeChange(2);">Viginere</button>
+    <button class = "modeButton" onclick = "modeChange(3);">Book Code</button>/!-->
+    <br>
+
+      <audio controls >
+       <source src="./Steganography/Spectrogram/RichardMayhew.wav" type="audio/wav">
+       <source src="./Steganography/Spectrogram/bristleconePine.wav" type="audio/wav">
+      Your browser does not support the audio element.
+      </audio>
+  <br>
+    <textarea class = "OutputTextArea" id = "OutputText" placeholder = "Insert Decryption Here"></textarea>
+    <br>
+    <button class = "VerifyButton" onclick = "verify();">Verify</button>
+    <button class = "RerollButton" onclick = "reroll();">Another One</button>
+    <em id = "result"></em>
+    <br>
+  </body>
+</html>
