@@ -1,6 +1,28 @@
 var plaintext = "";
 var easyMode = true;
 var gameMode = 0;
+
+const sentances = [
+  "Hello World",
+  "The Spice must flow",
+  "Nobody has encountered an explosive daisy and lived to tell the tale.",
+  "There was no telling what thoughts would come from the machine.",
+  "The teenage boy was accused of breaking his arm simply to get out of the test.",
+  "I was starting to worry that my pet turtle could tell what I was thinking.",
+  "At that moment I was the most fearsome weasel in the entire swamp.",
+  "Flying fish flew by the space station.Flying fish flew by the space station.",
+  "It must be five o'clock somewhere.",
+];
+
+const spectrogramAudio = [
+  ["./Steganography/Spectrogram/ReaperMan.wav", "LORD, WHAT CAN THE HARVEST HOPE FOR, IF NOT FOR THE CARE OF THE REAPER MAN?"],
+  ["./Steganography/Spectrogram/Sword.wav", "Anyone who thinks the pen is mightier than the sword has not been stabbed with both."],
+  ["./Steganography/Spectrogram/RichardMayhew.wav", "To say that Richard Mayhew was not very good at heights would be perfectly accurate, but would fail to give the full picture; it would be like describing the planet Jupiter as bigger than a duck."]
+];
+
+
+
+
 window.onload = (event) => {
   gameMode = 0;
   easyModeToggle();
@@ -8,32 +30,57 @@ window.onload = (event) => {
 
 function modeChange(mode) {
     gameMode = mode;
-    switch (gameMode) {
-        case 0:
-          document.getElementById("KeyInputNum").style.display = "none";
-          document.getElementById("KeyInputText").style.display = "none";
-          document.getElementById("BookDiv").style.display = "none";
-          break;
-        case 1:
-          document.getElementById("KeyInputNum").style.display = "inline-block";
-          document.getElementById("KeyInputText").style.display = "none";
-          document.getElementById("BookDiv").style.display = "none";
-          break;
-        case 2:
-          document.getElementById("KeyInputNum").style.display = "none";
-          document.getElementById("KeyInputText").style.display = "inline-block";
-          document.getElementById("BookDiv").style.display = "none";
-          break;
-        case 3:
-          document.getElementById("KeyInputNum").style.display = "none";
-          document.getElementById("KeyInputText").style.display = "none";
-          document.getElementById("BookDiv").style.display = "inline-block";
-          break;
-        default:
-          document.getElementById("modeButton").innerText = "????";
-          break;
+    document.getElementById("result").innerText = mode;
+    if (window.location.href == "https://understanding-unfiction.neocities.org/genericSubstitution" || window.location.href == "file:///D:/Repos/ARG-sites/Sites/genericSubstitution.html") {
+      switch (gameMode) {
+          case 0:
+            document.getElementById("KeyInputNum").style.display = "none";
+            document.getElementById("KeyInputText").style.display = "none";
+            document.getElementById("BookDiv").style.display = "none";
+
+            document.getElementById("ImageDiv").style.display = "none";
+            document.getElementById("AudioDiv").style.display = "inline-block";
+            break;
+          case 1:
+            document.getElementById("KeyInputNum").style.display = "inline-block";
+            document.getElementById("KeyInputText").style.display = "none";
+            document.getElementById("BookDiv").style.display = "none";
+
+            document.getElementById("ImageDiv").style.display = "inline-block";
+            document.getElementById("AudioDiv").style.display = "none";
+            break;
+          case 2:
+            document.getElementById("KeyInputNum").style.display = "none";
+            document.getElementById("KeyInputText").style.display = "inline-block";
+            document.getElementById("BookDiv").style.display = "none";
+            break;
+          case 3:
+            document.getElementById("KeyInputNum").style.display = "none";
+            document.getElementById("KeyInputText").style.display = "none";
+            document.getElementById("BookDiv").style.display = "inline-block";
+            break;
+          default:
+            document.getElementById("modeButton").innerText = "????";
+            break;
+      }
+    }
+    if (window.location.href == "https://understanding-unfiction.neocities.org/genericSteganography" || window.location.href == "file:///D:/Repos/ARG-sites/Sites/genericSteganography.html") {
+      switch (gameMode) {
+          case 0:
+            document.getElementById("ImageDiv").style.display = "none";
+            document.getElementById("AudioDiv").style.display = "inline-block";
+            break;
+          case 1:
+            document.getElementById("ImageDiv").style.display = "inline-block";
+            document.getElementById("AudioDiv").style.display = "none";
+            break;
+          default:
+            document.getElementById("modeButton").innerText = "????";
+            break;
+      }
     }
     reroll();
+    Selection();
 }
 
 function easyModeToggle() {
@@ -60,17 +107,6 @@ function verify() {
 
 function reroll() {
   document.getElementById("result").innerText = "";
-  const sentances = [
-    "Hello World",
-    "The Spice must flow",
-    "Nobody has encountered an explosive daisy and lived to tell the tale.",
-    "There was no telling what thoughts would come from the machine.",
-    "The teenage boy was accused of breaking his arm simply to get out of the test.",
-    "I was starting to worry that my pet turtle could tell what I was thinking.",
-    "At that moment I was the most fearsome weasel in the entire swamp.",
-    "Flying fish flew by the space station.Flying fish flew by the space station.",
-    "It must be five o'clock somewhere.",
-  ];
 
   var chosenSentance = sentances[Math.round(Math.random()*(sentances.length-1))];
   var out = "";
@@ -185,6 +221,16 @@ function reroll() {
 }
 
 
+
+function Selection() {
+
+  var sel = document.querySelector('input[name="RadioSelectorInput"]:checked');
+
+  //sel.max = spectrogramAudio.length;
+  document.getElementById("source").src = spectrogramAudio[sel.value % spectrogramAudio.length][0];
+  plaintext = spectrogramAudio[sel.value % spectrogramAudio.length][1];
+  document.getElementById("audio").load();
+}
 
 
 function Clean(str, toUpper) {

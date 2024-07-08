@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <script src="cypherPractise.js"></script>
   </head>
-  <body>
+  <body onload="Selection();">
     <a href="index.html" style = "margin-Left: -4vw">Go back</a>
     <h1 style="margin-top: 5px;">Steganography</h1>
     <br>
@@ -16,18 +16,33 @@
     <!--<button class = "modeButton" onclick = "modeChange(2);">Viginere</button>
     <button class = "modeButton" onclick = "modeChange(3);">Book Code</button>/!-->
     <br>
+    <div class = "divider">
+      <div id = "AudioDiv" style="margin-top: 25px;">
+        <audio controls id = "audio">
+         <source id="source" src="" type="audio/wav">
+        Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class = "InputBackgroundDiv">
+        <p class = "InputLabel">Choose File:</p>
+        <div class = "InputRadio">
+          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();" checked="true"> <label for="SelectorInput1">Terry Pratchet</label>
+            <br>
+          <input type="radio" value="1" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput0">Lemony Snicket</label>
+            <br>
+          <input type="radio" value="2" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput2">Neil Gaimen</label>
+        </div>
+      </div>
 
-      <audio controls >
-       <source src="./Steganography/Spectrogram/RichardMayhew.wav" type="audio/wav">
-       <source src="./Steganography/Spectrogram/bristleconePine.wav" type="audio/wav">
-      Your browser does not support the audio element.
-      </audio>
-  <br>
-    <textarea class = "OutputTextArea" id = "OutputText" placeholder = "Insert Decryption Here"></textarea>
-    <br>
-    <button class = "VerifyButton" onclick = "verify();">Verify</button>
-    <button class = "RerollButton" onclick = "reroll();">Another One</button>
-    <em id = "result"></em>
-    <br>
+      <br>
+      <textarea class = "OutputTextArea" id = "OutputText" placeholder = "Insert Decryption Here"></textarea>
+      <br>
+      <button class = "VerifyButton" onclick = "verify();">Verify</button>
+      <em id = "result"></em>
+      <br>
+    </div>
+    <div class = "divider left" id = "ImageDiv" style="background-color: #CE5A67; display: none; border-radius: 10px">
+      <img src="/D:/Pictures/CHADRIDOT.png">
+    </div>
   </body>
 </html>

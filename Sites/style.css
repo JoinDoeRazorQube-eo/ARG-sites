@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
+
 Body {
   background-color: #FCF5ED;
   margin-left: 5vw;
   accent-color: #CE5A67;
+
+  font-family: "Rokkitt", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 H1 {
   color: #CE5A67;
@@ -33,10 +40,20 @@ button {
   border-color: #CE5A67;
   color: #1F1717;
   border-radius: 5px;
+
+  font-family: "Rokkitt", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 
 audio {
   background-color: #CE5A67;
+}
+
+label {
+  color: #1F1717;
+  font-size: 12pt;
 }
 
 .InputBackgroundDiv {
@@ -68,6 +85,11 @@ audio {
   width: 300px;
   margin-top: 30px;
   margin-bottom: 10px;
+
+  font-family: "Rokkitt", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 
 .modeButton {
@@ -97,10 +119,28 @@ audio {
   border-style: inset;
   border-radius: 5px;
   display: none;
+
+  font-family: "Rokkitt", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 
 .divider {
   display: inline-block;
   height: 300px;
   width: 400px;
+}
+
+.divider.left {
+  position: absolute;
+  left: 500 px;
+  min-height: 325px;
+  height: auto;
+}
+
+.InputRadio {
+  text-align: left;
+  margin-left: 75px;
+  padding-bottom: 25px;
 }
