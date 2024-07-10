@@ -15,9 +15,9 @@ const sentances = [
 ];
 
 const spectrogramAudio = [
-  ["./Steganography/Spectrogram/ReaperMan.wav", "LORD, WHAT CAN THE HARVEST HOPE FOR, IF NOT FOR THE CARE OF THE REAPER MAN?"],
-  ["./Steganography/Spectrogram/Sword.wav", "Anyone who thinks the pen is mightier than the sword has not been stabbed with both."],
-  ["./Steganography/Spectrogram/RichardMayhew.wav", "To say that Richard Mayhew was not very good at heights would be perfectly accurate, but would fail to give the full picture; it would be like describing the planet Jupiter as bigger than a duck."]
+  ["https://drive.google.com/file/d/1WPuVd2_8oqb3-DF9TKAjhKFQudzVXw6L/preview", "LORD, WHAT CAN THE HARVEST HOPE FOR, IF NOT FOR THE CARE OF THE REAPER MAN?"],
+  ["https://drive.google.com/file/d/1EshAT8ZDk8sbfExbfcR_l8KMeG4xbpWd/preview", "Anyone who thinks the pen is mightier than the sword has not been stabbed with both."],
+  ["https://drive.google.com/file/d/1ZoaSu3stBaInaAGYPZNpWvP_2BVcDjzP/preview", "To say that Richard Mayhew was not very good at heights would be perfectly accurate, but would fail to give the full picture; it would be like describing the planet Jupiter as bigger than a duck."]
 ];
 
 
@@ -226,10 +226,8 @@ function Selection() {
 
   var sel = document.querySelector('input[name="RadioSelectorInput"]:checked');
 
-  //sel.max = spectrogramAudio.length;
-  document.getElementById("source").src = spectrogramAudio[sel.value % spectrogramAudio.length][0];
+  document.getElementById("AudioSource").src = spectrogramAudio[sel.value % spectrogramAudio.length][0];
   plaintext = spectrogramAudio[sel.value % spectrogramAudio.length][1];
-  document.getElementById("audio").load();
 }
 
 

@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <script src="cypherPractise.js"></script>
   </head>
-  <body onload="Selection();">
+  <body>
     <a href="index.html" style = "margin-Left: -4vw">Go back</a>
     <h1 style="margin-top: 5px;">Steganography</h1>
     <br>
@@ -18,15 +18,16 @@
     <br>
     <div class = "divider">
       <div id = "AudioDiv" style="margin-top: 25px;">
-        <audio controls id = "audio">
-         <source id="source" src="" type="audio/wav">
-        Your browser does not support the audio element.
-        </audio>
+        <iframe id="AudioSource"
+          allowtransparency = "true"
+          frameborder= "0"
+           src="https://drive.google.com/file/d/1WPuVd2_8oqb3-DF9TKAjhKFQudzVXw6L/preview">
+        </iframe>
       </div>
       <div class = "InputBackgroundDiv">
         <p class = "InputLabel">Choose File:</p>
         <div class = "InputRadio">
-          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();" checked="true"> <label for="SelectorInput1">Terry Pratchet</label>
+          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();" checked="true"> <label for="SelectorInput1">Terry Pratchett</label>
             <br>
           <input type="radio" value="1" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput0">Lemony Snicket</label>
             <br>

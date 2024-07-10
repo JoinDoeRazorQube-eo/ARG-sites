@@ -56,6 +56,11 @@ label {
   font-size: 12pt;
 }
 
+iframe {
+  width: 450px;
+  height: 75px;
+}
+
 .InputBackgroundDiv {
   background-color: #F4BF96;
   border-radius: 10px;
