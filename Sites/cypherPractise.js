@@ -234,6 +234,8 @@ function Selection() {
     document.querySelector('[for="SelectorInput0"]').innerText = "Terry Pratchett";
     document.querySelector('[for="SelectorInput1"]').innerText = "Lemony Snicket";
     document.querySelector('[for="SelectorInput2"]').innerText = "Neil Gaimen";
+
+    document.getElementById("password").style.display = "none";
   } else {
     file = stegImage[sel.value % stegImage.length][0];
     solution = stegImage[sel.value % stegImage.length][1];
@@ -242,6 +244,8 @@ function Selection() {
     document.querySelector('[for="SelectorInput0"]').innerText = "Pencil";
     document.querySelector('[for="SelectorInput1"]').innerText = "Glass";
     document.querySelector('[for="SelectorInput2"]').innerText = "Wall";
+
+    document.getElementById("password").style.display = "block";
   }
 
   document.getElementById(source).src = file;
