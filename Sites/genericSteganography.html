@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <script src="cypherPractise.js"></script>
   </head>
-  <body>
+  <body onload="Selection();">
     <a href="index.html" style = "margin-Left: -4vw">Go back</a>
     <h1 style="margin-top: 5px;">Steganography</h1>
     <br>
@@ -27,9 +27,9 @@
       <div class = "InputBackgroundDiv">
         <p class = "InputLabel">Choose File:</p>
         <div class = "InputRadio">
-          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();" checked="true"> <label for="SelectorInput1">Terry Pratchett</label>
+          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();" checked="true"> <label for="SelectorInput0">Terry Pratchett</label>
             <br>
-          <input type="radio" value="1" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput0">Lemony Snicket</label>
+          <input type="radio" value="1" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput1">Lemony Snicket</label>
             <br>
           <input type="radio" value="2" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput2">Neil Gaimen</label>
         </div>
@@ -42,8 +42,8 @@
       <em id = "result"></em>
       <br>
     </div>
-    <div class = "divider left" id = "ImageDiv" style="background-color: #CE5A67; display: none; border-radius: 10px">
-      <img src="/D:/Pictures/CHADRIDOT.png">
+    <div class = "divider left" id = "ImageDiv" style="display: none; top: 75px">
+      <img src="" id = "ImageSource" style="height:400px; width:auto;">
     </div>
   </body>
 </html>

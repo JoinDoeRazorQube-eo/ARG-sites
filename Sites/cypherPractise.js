@@ -20,7 +20,11 @@ const spectrogramAudio = [
   ["https://drive.google.com/file/d/1ZoaSu3stBaInaAGYPZNpWvP_2BVcDjzP/preview", "To say that Richard Mayhew was not very good at heights would be perfectly accurate, but would fail to give the full picture; it would be like describing the planet Jupiter as bigger than a duck."]
 ];
 
-
+const stegImage = [
+  ["./Steganography/Image/Pencil.png", "Writing a list of random sentences is harder than I initially thought it would be"],
+  ["./Steganography/Image/Glass.png", "She couldn't decide if the glass was half empty or half full so she drank it."],
+  ["./Steganography/Image/Wall.png", "There is no better feeling than staring at a wall with closed eyes."]
+];
 
 
 window.onload = (event) => {
@@ -30,24 +34,17 @@ window.onload = (event) => {
 
 function modeChange(mode) {
     gameMode = mode;
-    document.getElementById("result").innerText = mode;
-    if (window.location.href == "https://understanding-unfiction.neocities.org/genericSubstitution" || window.location.href == "file:///D:/Repos/ARG-sites/Sites/genericSubstitution.html") {
+    if (window.location.href.toLowerCase().includes("substitution")) {
       switch (gameMode) {
           case 0:
             document.getElementById("KeyInputNum").style.display = "none";
             document.getElementById("KeyInputText").style.display = "none";
             document.getElementById("BookDiv").style.display = "none";
-
-            document.getElementById("ImageDiv").style.display = "none";
-            document.getElementById("AudioDiv").style.display = "inline-block";
             break;
           case 1:
             document.getElementById("KeyInputNum").style.display = "inline-block";
             document.getElementById("KeyInputText").style.display = "none";
             document.getElementById("BookDiv").style.display = "none";
-
-            document.getElementById("ImageDiv").style.display = "inline-block";
-            document.getElementById("AudioDiv").style.display = "none";
             break;
           case 2:
             document.getElementById("KeyInputNum").style.display = "none";
@@ -63,8 +60,9 @@ function modeChange(mode) {
             document.getElementById("modeButton").innerText = "????";
             break;
       }
+      reroll();
     }
-    if (window.location.href == "https://understanding-unfiction.neocities.org/genericSteganography" || window.location.href == "file:///D:/Repos/ARG-sites/Sites/genericSteganography.html") {
+    if (window.location.href.toLowerCase().includes("steganography")) {
       switch (gameMode) {
           case 0:
             document.getElementById("ImageDiv").style.display = "none";
@@ -79,7 +77,6 @@ function modeChange(mode) {
             break;
       }
     }
-    reroll();
     Selection();
 }
 
@@ -225,9 +222,30 @@ function reroll() {
 function Selection() {
 
   var sel = document.querySelector('input[name="RadioSelectorInput"]:checked');
+  var source = "";
+  var file = "";
+  var solution = "";
 
-  document.getElementById("AudioSource").src = spectrogramAudio[sel.value % spectrogramAudio.length][0];
-  plaintext = spectrogramAudio[sel.value % spectrogramAudio.length][1];
+  if (gameMode == 0) {
+    file = spectrogramAudio[sel.value % spectrogramAudio.length][0];
+    solution = spectrogramAudio[sel.value % spectrogramAudio.length][1];
+    source = "AudioSource";
+
+    document.querySelector('[for="SelectorInput0"]').innerText = "Terry Pratchett";
+    document.querySelector('[for="SelectorInput1"]').innerText = "Lemony Snicket";
+    document.querySelector('[for="SelectorInput2"]').innerText = "Neil Gaimen";
+  } else {
+    file = stegImage[sel.value % stegImage.length][0];
+    solution = stegImage[sel.value % stegImage.length][1];
+    source = "ImageSource";
+
+    document.querySelector('[for="SelectorInput0"]').innerText = "Pencil";
+    document.querySelector('[for="SelectorInput1"]').innerText = "Glass";
+    document.querySelector('[for="SelectorInput2"]').innerText = "Wall";
+  }
+
+  document.getElementById(source).src = file;
+  plaintext = solution;
 }
 
 
