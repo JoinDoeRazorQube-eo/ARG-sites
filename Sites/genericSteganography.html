@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <script src="cypherPractise.js"></script>
   </head>
-  <body onload="Selection();">
+  <body>
     <a href="index.html" style = "margin-Left: -4vw">Go back</a>
     <h1 style="margin-top: 5px;">Steganography</h1>
     <br>
@@ -21,19 +21,20 @@
         <iframe id="AudioSource"
           allowtransparency = "true"
           frameborder= "0"
-           src="https://drive.google.com/file/d/1WPuVd2_8oqb3-DF9TKAjhKFQudzVXw6L/preview">
+           src="">
         </iframe>
       </div>
       <div class = "InputBackgroundDiv">
         <p class = "InputLabel">Choose File:</p>
+        <p style="margin-top: -20px">please be patient, it will load in due time</p>
         <div class = "InputRadio">
-          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();" checked="true"> <label for="SelectorInput0">Terry Pratchett</label>
+          <input type="radio" name = "RadioSelectorInput" value="0" onchange="Selection();"> <label for="SelectorInput0">Terry Pratchett</label>
             <br>
           <input type="radio" value="1" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput1">Lemony Snicket</label>
             <br>
           <input type="radio" value="2" name = "RadioSelectorInput" onchange="Selection();"> <label for="SelectorInput2">Neil Gaimen</label>
         </div>
-        <p style="display: none" id = "password">Use <a target="_blank" href="https://embeddedsw.net/OpenPuff_Steganography_Home.html">openpuff.</a> The password for unhiding is <em>steganography</em></p>
+        <p style="display: none" id = "password">Use <a target="_blank" href="https://embeddedsw.net/OpenPuff_Steganography_Home.html">openpuff.</a><br> The password for unhiding is <br><em>steganography</em></p>
         <div style="padding-bottom: 25px;"></div>
       </div>
 

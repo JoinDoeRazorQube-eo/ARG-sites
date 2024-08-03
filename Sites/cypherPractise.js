@@ -1,6 +1,14 @@
 var plaintext = "";
 var easyMode = true;
 var gameMode = 0;
+var egg = 0;
+const anom = {
+  Back: 1,
+  LinkTxt: 2,
+  StrangeImage: 3,
+  StrangeAudio: 4,
+  ClickMe: 5
+}
 
 const sentances = [
   "Hello World",
@@ -10,14 +18,14 @@ const sentances = [
   "The teenage boy was accused of breaking his arm simply to get out of the test.",
   "I was starting to worry that my pet turtle could tell what I was thinking.",
   "At that moment I was the most fearsome weasel in the entire swamp.",
-  "Flying fish flew by the space station.Flying fish flew by the space station.",
+  "Flying fish flew by the space station.",
   "It must be five o'clock somewhere.",
 ];
 
 const spectrogramAudio = [
-  ["https://drive.google.com/file/d/1WPuVd2_8oqb3-DF9TKAjhKFQudzVXw6L/preview", "LORD, WHAT CAN THE HARVEST HOPE FOR, IF NOT FOR THE CARE OF THE REAPER MAN?"],
-  ["https://drive.google.com/file/d/1EshAT8ZDk8sbfExbfcR_l8KMeG4xbpWd/preview", "Anyone who thinks the pen is mightier than the sword has not been stabbed with both."],
-  ["https://drive.google.com/file/d/1ZoaSu3stBaInaAGYPZNpWvP_2BVcDjzP/preview", "To say that Richard Mayhew was not very good at heights would be perfectly accurate, but would fail to give the full picture; it would be like describing the planet Jupiter as bigger than a duck."]
+  ["https://drive.google.com/file/d/1ura47Td6tUyQTU8IuwVQ4el7c95AQAyR/preview", "LORD, WHAT CAN THE HARVEST HOPE FOR, IF NOT FOR THE CARE OF THE REAPER MAN?"],
+  ["https://drive.google.com/file/d/1BL6E20CjNbG65RZnvihtIE0nSQzUzXOz/preview", "Anyone who thinks the pen is mightier than the sword has not been stabbed with both."],
+  ["https://drive.google.com/file/d/1bw3R39foqtecx_C8Z1pd-2zy45bl228R/preview", "To say that Richard Mayhew was not very good at heights would be perfectly accurate, but would fail to give the full picture; it would be like describing the planet Jupiter as bigger than a duck."]
 ];
 
 const stegImage = [
@@ -26,14 +34,98 @@ const stegImage = [
   ["./Steganography/Image/Wall.png", "There is no better feeling than staring at a wall with closed eyes."]
 ];
 
-
 window.onload = (event) => {
   gameMode = 0;
-  easyModeToggle();
+  easterEgg();
+  if (window.location.href.toLowerCase().includes("substitution")) {
+    easyModeToggle();
+  }
+  if (window.location.href.toLowerCase().includes("steganography")) {
+    Selection();
+  }
 };
+
+
+
+function easterEgg() {
+  var fun = Math.random()*100;
+  var perc = 5; //for testing >5 is good REMEMBER TO DROP IT SIGNIFICANTLY!!!!
+  if (fun <= perc*4) {
+    egg = Math.ceil(fun/perc);
+  }
+
+  let hours = new Date().getHours();
+  if (hours > 4) { //NO EGG FOR U!
+    if (egg == 1) {
+      egg = 0;
+    }
+  }
+}
+
+function doEgg() {
+  switch (egg) {
+    case anom.Back:
+      let msg = "GO BACK";
+      let list = document.querySelectorAll('p, a, h1, button, label, em');
+      for (let i = 0; i < list.length; i++){
+        list[i].innerText = msg;
+      }
+      document.getElementById("OutputText").placeholder = msg;
+      break;
+
+    case anom.LinkTxt:
+    //this one must be done in reroll fuction
+      //plaintext = "LINK TO SOMEPLACE" //remember to do this CANNOT BE CASE SENSITIVE unless case given somewhere else
+      break;
+
+    case anom.StrangeImage:
+      if (gameMode == 1 && window.location.href.toLowerCase().includes("steganography")) {
+        file = "./Steganography/Image/Door.png";
+        document.querySelector('[for="SelectorInput0"]').innerText = "Something cool";
+        document.querySelector('[for="SelectorInput1"]').innerText = "Something hot";
+        document.querySelector('[for="SelectorInput2"]').innerText = "Something lost";
+      }
+
+      break;
+
+    case anom.StrangeAudio:
+      if (gameMode == 0 && window.location.href.toLowerCase().includes("steganography")) {
+        file = "https://drive.google.com/file/d/1xM2--e7eMQlkVT2-Gwh2A0yPMRQzaaQg/preview";
+        let msg = "?????";
+        for (let i = 0; i < 3; i++) {
+          let query = '[for="SelectorInputX"]';
+          query = query.replace('X', i);
+          document.querySelector(query).innerText = msg;
+        }
+      }
+      break;
+
+    case anom.ClickMe:
+      if (document.getElementById("ClickMe!") ==  null) {
+        document.body.appendChild(document.createElement('br'))
+
+
+        const a = document.createElement('a');
+        a.href = "https://drive.google.com/drive/folders/1gbVJ8Egw682k361lCE7mYgCDHJktmnrW?preview";
+        a.target = "_blank";
+
+        const button = document.createElement('button');
+        button.textContent = 'Click me!';
+        button.id = "ClickMe!";
+
+        document.body.appendChild(a);
+        a.appendChild(button);
+        break;
+      }
+
+    default:
+      break;
+  }
+}
 
 function modeChange(mode) {
     gameMode = mode;
+    doEgg();
     if (window.location.href.toLowerCase().includes("substitution")) {
       switch (gameMode) {
           case 0:
@@ -107,6 +199,9 @@ function reroll() {
 
   var chosenSentance = sentances[Math.round(Math.random()*(sentances.length-1))];
   var out = "";
+  if (egg == anom.LinkTxt) {
+    chosenSentance = "https://www.youtube.com/watch?v=JYfsUS03vnQ";
+  }
   if (easyMode) {
     chosenSentance = Clean(chosenSentance, true);
   }
@@ -130,7 +225,7 @@ function reroll() {
       let asciiCode;
         let inputText;
         if (document.getElementById("KeyInputText").value == '') {
-          inputText = "Viginere";
+          inputText = "Vigenere";
         } else {
           inputText = document.getElementById("KeyInputText").value;
         }
@@ -215,41 +310,43 @@ function reroll() {
      }
   }
   document.getElementById("InputText").innerText = out;
+  doEgg()
 }
 
 
-
+var file = "";
+var sel;
 function Selection() {
 
-  var sel = document.querySelector('input[name="RadioSelectorInput"]:checked');
+  sel = document.querySelector('input[name="RadioSelectorInput"]:checked');
   var source = "";
-  var file = "";
+
   var solution = "";
 
   if (gameMode == 0) {
-    file = spectrogramAudio[sel.value % spectrogramAudio.length][0];
-    solution = spectrogramAudio[sel.value % spectrogramAudio.length][1];
-    source = "AudioSource";
-
     document.querySelector('[for="SelectorInput0"]').innerText = "Terry Pratchett";
     document.querySelector('[for="SelectorInput1"]').innerText = "Lemony Snicket";
     document.querySelector('[for="SelectorInput2"]').innerText = "Neil Gaimen";
+      document.getElementById("password").style.display = "none";
 
-    document.getElementById("password").style.display = "none";
+    file = spectrogramAudio[sel.value % spectrogramAudio.length][0];
+    solution = spectrogramAudio[sel.value % spectrogramAudio.length][1];
+    source = "AudioSource";
   } else {
-    file = stegImage[sel.value % stegImage.length][0];
-    solution = stegImage[sel.value % stegImage.length][1];
-    source = "ImageSource";
-
     document.querySelector('[for="SelectorInput0"]').innerText = "Pencil";
     document.querySelector('[for="SelectorInput1"]').innerText = "Glass";
     document.querySelector('[for="SelectorInput2"]').innerText = "Wall";
+      document.getElementById("password").style.display = "block";
 
-    document.getElementById("password").style.display = "block";
+    file = stegImage[sel.value % stegImage.length][0];
+    solution = stegImage[sel.value % stegImage.length][1];
+    source = "ImageSource";
   }
 
-  document.getElementById(source).src = file;
+
   plaintext = solution;
+  doEgg()
+  document.getElementById(source).src = file;
 }
 
 
