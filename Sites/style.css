@@ -30,6 +30,10 @@ A:visited {
   color: #ffa25b;
 }
 
+.everRed:visited {
+  color: #CE5A67;
+}
+
 em {
   color: #1F1717;
   font-size: 12pt;
@@ -134,7 +138,8 @@ iframe {
 .divider {
   display: inline-block;
   height: 300px;
-  width: 400px;
+  width: auto;
+  min-width: 400px;
 }
 
 .divider.left {
