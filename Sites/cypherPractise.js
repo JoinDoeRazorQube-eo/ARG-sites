@@ -50,7 +50,7 @@ window.onload = (event) => {
 function easterEgg() {
   var fun = Math.random()*100;
   var perc = 5; //for testing >5 is good REMEMBER TO DROP IT SIGNIFICANTLY!!!!
-  if (fun <= perc*4) {
+  if (fun <= perc*5) {
     egg = Math.ceil(fun/perc);
   }
 
