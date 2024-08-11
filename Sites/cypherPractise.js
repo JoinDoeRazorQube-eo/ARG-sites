@@ -309,6 +309,11 @@ function reroll() {
        }
      }
   }
+  if (out.includes(" ")) {
+    document.getElementById("InputBackground").style.width = "300px";
+  }else{
+    document.getElementById("InputBackground").style.width = "auto";
+  }
   document.getElementById("InputText").innerText = out;
   doEgg()
 }
